@@ -1,11 +1,15 @@
 package com.udemy.projetomc.domain;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
+@Entity
 public class Endereco implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String logradouro;
     private String numero;
@@ -13,7 +17,12 @@ public class Endereco implements Serializable {
     private String bairro;
     private String cep;
 
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
+
+    @ManyToOne
+    @JoinColumn(name = "cidade_id")
     private Cidade cidade;
 
     public Endereco() {
