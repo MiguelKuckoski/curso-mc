@@ -1,5 +1,6 @@
 package com.udemy.projetomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.udemy.projetomc.domain.Endereco;
 import com.udemy.projetomc.domain.enums.TipoCliente;
 
@@ -17,12 +18,13 @@ public class Cliente implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Integer id;
     private String nome;
     private String email;
     private String cpfOuCnpj;
     private Integer tipoCliente;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<>();
 
@@ -33,7 +35,7 @@ public class Cliente implements Serializable {
     public Cliente() {
     }
 
-    public Cliente(String id, String nome, String email, String cpfOuCnpj, TipoCliente tipoCliente) {
+    public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipoCliente) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -73,11 +75,11 @@ public class Cliente implements Serializable {
         this.tipoCliente = tipoCliente.getCod();
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

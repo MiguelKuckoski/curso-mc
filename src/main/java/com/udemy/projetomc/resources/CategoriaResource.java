@@ -1,5 +1,7 @@
 package com.udemy.projetomc.resources;
 
+import com.udemy.projetomc.domain.Cliente;
+import com.udemy.projetomc.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
