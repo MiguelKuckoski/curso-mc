@@ -33,6 +33,9 @@ public class ProjetoSpringApplication implements CommandLineRunner{
 
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+
+    @Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetoSpringApplication.class, args);
@@ -96,6 +99,20 @@ public class ProjetoSpringApplication implements CommandLineRunner{
 
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pgto1, pgto2));
+
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 1, 0.0, 2000.0);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 2, 0.0,  80.0);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 1, 100.0, 800.0);
+
+		ped1.getItemPedido().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItemPedido().addAll(Arrays.asList(ip3));
+
+		p1.getItemPedido().addAll(Arrays.asList(ip1));
+		p2.getItemPedido().addAll(Arrays.asList(ip3));
+		p3.getItemPedido().addAll(Arrays.asList(ip2));
+
+
+        itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
 	}
 
 }

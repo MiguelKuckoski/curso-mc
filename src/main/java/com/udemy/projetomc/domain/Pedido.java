@@ -2,8 +2,7 @@ package com.udemy.projetomc.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class Pedido implements Serializable {
@@ -25,6 +24,9 @@ public class Pedido implements Serializable {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
+    @OneToMany(mappedBy = "id.pedido")
+    private Set<ItemPedido> itemPedido = new HashSet<>();
+
     public Pedido() {
     }
 
@@ -33,6 +35,14 @@ public class Pedido implements Serializable {
         this.date = date;
         this.cliente = cliente;
         this.enderecoEntrega = enderecoEntrega;
+    }
+
+    public List<Pedido> getPedidos() {
+        List<Pedido> pedidoList = new ArrayList<>();
+        for (ItemPedido itemPedido: itemPedido) {
+            pedidoList.add(itemPedido.getPedido());
+        }
+        return pedidoList;
     }
 
     public Integer getId() {
@@ -75,6 +85,14 @@ public class Pedido implements Serializable {
         this.pagamento = pagamento;
     }
 
+    public Set<ItemPedido> getItemPedido() {
+        return itemPedido;
+    }
+
+    public void setItemPedido(Set<ItemPedido> itemPedido) {
+        this.itemPedido = itemPedido;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -82,10 +100,10 @@ public class Pedido implements Serializable {
         Pedido pedido = (Pedido) o;
         return Objects.equals(getId(), pedido.getId());
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(getId());
     }
+
 
 }
