@@ -1,7 +1,7 @@
 package com.udemy.projetomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.udemy.projetomc.domain.Endereco;
 import com.udemy.projetomc.domain.enums.TipoCliente;
 
 import javax.persistence.*;
@@ -29,6 +29,7 @@ public class Cliente implements Serializable {
     @CollectionTable(name = "TELEFONE")
     private Set<String> telefones = new HashSet<>();
 
+    @JsonBackReference
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
 

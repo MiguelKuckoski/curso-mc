@@ -1,5 +1,6 @@
 package com.udemy.projetomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.udemy.projetomc.domain.enums.EstadoPagamento;
 
 import javax.persistence.Entity;
@@ -9,7 +10,10 @@ import java.util.Date;
 public class PagamentoComBoleto extends Pagamento {
     private static final long serialVersionUID = 1L;
 
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private Date dataVencimento;
+
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private Date dataPagmamento;
 
     public PagamentoComBoleto() {
