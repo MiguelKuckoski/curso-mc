@@ -1,6 +1,7 @@
 package com.udemy.projetomc.services;
 
 import com.udemy.projetomc.domain.Categoria;
+import com.udemy.projetomc.dto.CategoriaDTO;
 import com.udemy.projetomc.repositories.CategoriaRepository;
 import com.udemy.projetomc.services.exceptions.DataIntegrityViolationException;
 import com.udemy.projetomc.services.exceptions.ObjectNotFoundException;
@@ -53,5 +54,9 @@ public class CategoriaService {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
 		return categoriaRepository.findAll(pageRequest);
 
+	}
+
+	public Categoria fromDTO(CategoriaDTO objDTO) {
+		return new Categoria(objDTO.getId(), objDTO.getNome());
 	}
 }
