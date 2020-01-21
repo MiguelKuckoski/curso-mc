@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.udemy.projetomc.domain.Categoria;
-import com.udemy.projetomc.services.CategoriaService;
-
 @RestController
 @RequestMapping(value="/clientes")
 public class ClienteResource {
@@ -20,8 +17,8 @@ public class ClienteResource {
 	private ClienteService clienteService;
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<?> find(@PathVariable Integer id) {
-		Cliente obj = clienteService.buscar(id);
+	public ResponseEntity<Cliente> find(@PathVariable Integer id) {
+		Cliente obj = clienteService.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 }
