@@ -30,11 +30,16 @@ public class CategoriaResource {
 		return ResponseEntity.created(uri).build();
 	}
 
-//	@PutMapping(value = "/{id}")
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
 	public ResponseEntity<Void> update(@RequestBody Categoria obj, @PathVariable Integer id) {
 	    obj.setId(id);
 	    obj = categoriaService.update(obj);
 	    return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        categoriaService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
