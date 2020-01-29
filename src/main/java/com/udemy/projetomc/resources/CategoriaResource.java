@@ -41,7 +41,7 @@ public class CategoriaResource {
 	    Categoria obj = categoriaService.fromDTO(objDTO);
 		obj.setId(id);
 	    obj = categoriaService.update(obj);
-	    return ResponseEntity.notFound().build();
+	    return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping(value = "/{id}")
